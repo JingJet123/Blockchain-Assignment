@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description"
+    content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <!-- title -->
+  <title>Shop</title>
+
+  <!-- favicon -->
+  <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+  <!-- google font -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet" />
+
+  <!--smart contract-->
+  <script src="SmartContract.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
+
+  <!-- fontawesome -->
+  <link rel="stylesheet" href="css/all.min.css" />
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+  <!-- owl carousel -->
+  <link rel="stylesheet" href="css/owl.carousel.css" />
+  <!-- magnific popup -->
+  <link rel="stylesheet" href="css/magnific-popup.css" />
+  <!-- animate css -->
+  <link rel="stylesheet" href="css/animate.css" />
+  <!-- mean menu css -->
+  <link rel="stylesheet" href="css/meanmenu.min.css" />
+  <!-- main style -->
+  <link rel="stylesheet" href="css/main.css" />
+  <!-- responsive -->
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+
+<body>
+  <!--PreLoader-->
+  <div class="loader">
+    <div class="loader-inner">
+      <div class="circle"></div>
+    </div>
+  </div>
+  <!--PreLoader Ends-->
+
+  <!-- header -->
+  <div class="top-header-area" id="sticker">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-sm-12 text-center">
+          <div class="main-menu-wrap">
+            <!-- logo -->
+            <div class="site-logo">
+              <a href="index.html">
+                <img src="assets/img/logo.png" alt="" />
+              </a>
+            </div>
+            <!-- logo -->
+
+            <!-- menu start -->
+            <nav class="main-menu">
+              <ul>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li>
+                  <a href="#">Worker <i class="fas fa-chevron-down"></i></a>
+                  <ul>
+                    <li><a href="Farmer.html">Farmer</a></li>
+                    <li><a href="FarmerSendDurian.html">Farmer Send Durian</a></li>
+                    <li><a href="Distributor.html">Distributor</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <div class="header-icons">
+                    <a class="login-icon" href="Register.html"><i class="fas fa-sign-in-alt"></i></a>
+                    <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                  </div>
+                </li>
+              </ul>
+            </nav>
+            <style>
+              nav.main-menu ul li.worker-link ul {
+                display: none;
+              }
+
+              nav.main-menu ul li.worker-link:hover>ul {
+                display: block;
+              }
+
+              nav.main-menu ul {
+                position: relative;
+              }
+
+              nav.main-menu ul li ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                display: none;
+              }
+
+              nav.main-menu ul li:hover>ul {
+                display: block;
+              }
+            </style>
+
+            <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+            <div class="mobile-menu"></div>
+            <!-- menu end -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end header -->
+
+  <!-- search area -->
+  <div class="search-area">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <span class="close-btn"><i class="fas fa-window-close"></i></span>
+          <div class="search-bar">
+            <div class="search-bar-tablecell">
+              <h3>Search For:</h3>
+              <input type="text" placeholder="Keywords" />
+              <button type="submit">
+                Search <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end search arewa -->
+
+  <!-- breadcrumb-section -->
+  <div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2 text-center">
+          <div class="breadcrumb-text">
+            <p>Fresh and Organic</p>
+            <h1>Shop</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end breadcrumb section -->
+
+  <!-- products -->
+  <div class="product-section mt-150 mb-150">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="product-filters">
+            <ul>
+              <li class="active" data-filter="*">All</li>
+              <li data-filter=".strawberry">Musang King</li>
+              <li data-filter=".berry">Red Prawn</li>
+              <li data-filter=".lemon">Golden Pheonix</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" id="product-lists">
+        <!--Product HERE-->
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <div class="pagination-wrap">
+            <ul>
+              <li><a href="#">Prev</a></li>
+              <li><a href="#">1</a></li>
+              <li><a class="active" href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">Next</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end products -->
+
+  <!-- logo carousel -->
+  <!-- end logo carousel -->
+
+  <!-- footer -->
+  <div class="footer-area">
+    <div class="container" style="margin-right: 80px">
+      <div class="row">
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-box about-widget">
+            <h2 class="widget-title">About us</h2>
+            <p>
+              Durian Empire is a family-owned business dedicated to bringing
+              the best durians to our customers. We have been in the durian
+              business for many years and have built a reputation for sourcing
+              only the highest quality durians from trusted suppliers. We
+              understand that durians can be an acquired taste, but we believe
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-box get-in-touch">
+            <h2 class="widget-title">Get in Touch</h2>
+            <ul>
+              <li>
+                No. 28, Jalan SS21/58, Damansara Utama, 47400 Petaling Jaya,
+                Selangor, Malaysia
+              </li>
+              <li>support@durianempire.com</li>
+              <li>+60 12-345-6789</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-box pages">
+            <h2 class="widget-title">Pages</h2>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="shop.html">Shop</a></li>
+              <li><a href="news.html">News</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end footer -->
+
+  <!-- copyright -->
+  <!-- end copyright -->
+
+  <!-- javascript-->
+  <!-- <script>
+      function purchase() {
+        alert("Purchase this product?");
+      }
+    </script> -->
+  <script>
+
+    accessToMetamask();
+    accessToContract();
+
+    function formatDate(date) {
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      return `${year}/${month}/${day}`;
+    }
+
+    async function view(id) {
+      console.log(id);
+      await accessToMetamask();
+      await accessToContract();
+      const durianid = String(id);
+      console.log(durianid);
+      const durians = await contract.methods.getDurianDetail(durianid).call();
+      console.log(durians);
+      console.log(durians[0]);
+
+      const harvestDate = new Date(durians[5] * 1000);
+      const distributionDate = new Date(durians[8] * 1000);
+      const retailerDate = new Date(durians[11] * 1000);
+
+      const formattedHarvestDate = formatDate(harvestDate);
+      const formattedDistributionDate = formatDate(distributionDate);
+      const formattedRetailerDate = formatDate(retailerDate);
+
+      alert("Tree: " + durians[1] + "\n" +
+        "Price: " + durians[3] + "\n" +
+        "Weight: " + durians[4] + "\n" +
+        "Harvest Date: " + formattedHarvestDate + "\n" +
+        "Distribution Date: " + formattedDistributionDate + "\n" +
+        "Retailer Date: " + formattedRetailerDate);
+    }
+
+    const harvestDate = new Date(durians[5] * 1000);
+    const distributionDate = new Date(durians[8] * 1000);
+    const retailerDate = new Date(durians[11] * 1000);
+
+    const formattedHarvestDate = formatDate(harvestDate);
+    const formattedDistributionDate = formatDate(distributionDate);
+    const formattedRetailerDate = formatDate(retailerDate);
+
+    function formatDate(date) {
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    console.log(formattedHarvestDate); // example output: 2022-01-01
+    console.log(formattedDistributionDate); // example output: 2022-01-05
+    console.log(formattedRetailerDate); // example output: 2022-01-10
+
+    async function purchase(id) {
+      var durianid = id;
+      const durians = await contract.methods.getDurianDetail(durianid).call();
+
+      if (confirm("Are you sure you want to purchase " + "(" + durianid + ")" + "?")) {
+        // Construct the URL with the durian name and image as query parameters
+        const amount = web3.utils.toWei(durians[3], 'ether');
+        const recipient = durians[10];
+        const transaction = {
+          from: account,
+          to: recipient,
+          value: amount,
+        };
+
+        // Sign and send the transaction
+        web3.eth.sendTransaction(transaction, (error, hash) => {
+          if (error) {
+            console.error(error);
+          } else {
+            console.log('Transaction hash:', hash);
+          }
+        });
+
+        const url = `purchase-history.html`;
+        await window.contract.methods.buyFromRetailer(durianid)
+          .send({ from: account, value: durians[3] })
+          .on('transactionHash', function (hash) {
+            console.log('Transaction Hash:', hash);
+          })
+          .on('receipt', function (receipt) {
+            console.log('Transaction Receipt:', receipt);
+          })
+          .on('error', console.error);
+        // Navigate to the purchase history page with the URL containing the query parameters
+        window.location.href = url;
+      } else {
+        // Cancel purchase
+      }
+    }
+
+
+
+    // Sample product data
+    const products = [
+      { name: "Musang King", price: 90, description: "The surface is covered in large, pyramidal spikes that are wide and spaced apart", image: "assets/img/products/musangking.png" },
+      { name: "D24", price: 60, description: "The flesh is golden yellow and has a slightly fibrous texture", image: "assets/img/products/d24.png" },
+      { name: "XO", price: 100, description: "Has a creamy texture and a distinctive bitter-sweet taste", image: "assets/img/products/d24.png" }];
+
+
+    // Function to generate HTML for a single product
+    async function getProductHtml(id) {
+      const durians = await contract.methods.getDurianDetail(id).call();
+      let des = "";
+      let img = "";
+      //switch TYPE
+      switch (durians[2]) {
+        case "MusangKing":
+          des = "The surface is covered in large, pyramidal spikes that are wide and spaced apart";
+          img = "assets/img/products/musangking.png";
+          break;
+        case "RedPrawn":
+          des = "Are known for their creamy, sticky and smooth,there are small to medium-sized seeds";
+          img = "assets/img/products/redprawn.png";
+          break;
+        case "GoldenPheonix":
+          des = "Rare Malaysian variety belonging to Malvaceae and only found growing in select regions";
+          img = "assets/img/products/goldenpheonix.png";
+          break;
+        case "D24":
+          des = "Small to medium fruits, averaging 1.5 ~ 2 kg and generally have an ellipsoidal, lopsided.";
+          img = "assets/img/products/d24.png";
+          break;
+        case "D168":
+          des = "Covered in closely arranged, long, narrow spikes and fruit’s range in color from brown to pale green.";
+          img = "assets/img/products/d168.jpg";
+          break;
+
+      }
+      const farmerValue = await contract.methods.getAddName(durians[6]).call();
+      const CenterValue = await contract.methods.getAddName(durians[7]).call();
+      const RetailerValue = await contract.methods.getAddName(durians[10]).call();
+      //Based on product[4] set description & image & name
+      return `
+      <div class="col-lg-4 col-md-6 text-center strawberry">
+        <div class="single-product-item">
+          <div class="product-image">
+            <a href="shop.html"><img src="${img}" alt=""></a>
+          </div>
+          <h3>${durians[2]}</h3>
+          <p class="product-price"><span>Per Kg</span>${durians[3]} ETH</p>
+          <p>Farmer Detail: ${farmerValue[0]}<br/>${farmerValue[1]}</p>
+          <p>Distributor Detail: ${CenterValue[0]}<br/>${CenterValue[1]}</p>
+          <p>Retailer Detail: ${RetailerValue[0]}<br/>${RetailerValue[1]}</p>
+          <a class="cart-btn" value="${id}" onclick="view('${id}')"><i class="fa fa-info-circle"></i>View Info</a>
+          <a class="cart-btn" value="${id}" onclick="purchase('${id}')"><i class="fas fa-shopping-cart"></i>Purchase</a>
+        </div>
+      </div>`;
+    }
+
+    // Function to display products on the page
+    async function displayProducts() {
+      //Get all durian
+      await accessToMetamask();
+      await accessToContract();
+      console.log("getAllDurians");
+      const durians = await contract.methods.getUnsoldDurians().call({ from: account });
+      console.log(durians);
+      //console.log(durians[0]);
+
+      const container = document.getElementById("product-lists");
+      let html = "";
+      for (let i = 0; i < durians.length; i++) {
+        console.log(durians[i]);
+        const html2 = await getProductHtml(durians[i]); // Wait for the promise to resolve
+        html += html2;
+      }
+      container.innerHTML = html;
+
+      //container.insertAdjacentHTML("beforeend", html);
+
+    }
+
+    function appendProduct(html) {
+      const container = document.getElementById("product-lists");
+      container.innerHTML += html;
+    }
+
+    // Call the function to generate the products on page load
+    //window.onload = generateProducts;
+
+    // Call the displayProducts function to generate HTML for all products and display them on the page
+    displayProducts();
+
+
+  </script>
+
+  <!-- end javascript-->
+
+  <!-- jquery -->
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <!-- bootstrap -->
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <!-- count down -->
+  <script src="js/jquery.countdown.js"></script>
+  <!-- isotope -->
+  <script src="js/jquery.isotope-3.0.6.min.js"></script>
+  <!-- waypoints -->
+  <script src="js/waypoints.js"></script>
+  <!-- owl carousel -->
+  <script src="js/owl.carousel.min.js"></script>
+  <!-- magnific popup -->
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <!-- mean menu -->
+  <script src="js/jquery.meanmenu.min.js"></script>
+  <!-- sticker js -->
+  <script src="js/sticker.js"></script>
+  <!-- main js -->
+  <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Durian Review</title>
+  <!-- favicon -->
+  <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png" />
+  <!-- google font -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cdbootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cdbootstrap/css/cdb.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/cdbootstrap/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/cdbootstrap/js/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/cdbootstrap/js/cdb.min.js"></script>
+  <!--smart contract-->
+  <script src="SmartContract.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
+
+
+  <!-- fontawesome -->
+  <!-- fontawesome -->
+  <link rel="stylesheet" href="css/all.min.css">
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <!-- owl carousel -->
+  <link rel="stylesheet" href="css/owl.carousel.css">
+  <!-- magnific popup -->
+  <link rel="stylesheet" href="css/magnific-popup.css">
+  <!-- animate css -->
+  <link rel="stylesheet" href="css/animate.css">
+  <!-- mean menu css -->
+  <link rel="stylesheet" href="css/meanmenu.min.css">
+  <!-- main style -->
+  <link rel="stylesheet" href="css/main.css">
+  <!-- responsive -->
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    /* body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      } */
+    .image-1 {
+      position: absolute;
+      width: 200px;
+      /* adjust the width as needed */
+      height: auto;
+      margin-top: 40%;
+      left: 3.5%;
+    }
+
+    .image-2 {
+      position: absolute;
+      width: 300px;
+      /* adjust the width as needed */
+      height: auto;
+      margin-top: 40%;
+      right: 0;
+    }
+
+    .image-3 {
+      position: absolute;
+      width: 200px;
+      /* adjust the width as needed */
+      height: auto;
+      margin-top: 15%;
+      /* bottom: 0; */
+      right: 3.5%;
+    }
+
+    .image-4 {
+      position: absolute;
+      width: 270px;
+      /* adjust the width as needed */
+      height: auto;
+      margin-top: 17%;
+      left: 1%;
+    }
+
+    img {
+      width: 150%;
+      height: 150%;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      width: 60%;
+      margin: 0 auto;
+      background-color: #FFFAF0;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #556b2f;
+      margin-bottom: 40px;
+
+    }
+
+    h1,
+    h2 {
+      text-align: center;
+    }
+
+    .durianImage {
+      display: block;
+      margin: 0 auto;
+      width: 15%;
+      height: 20%;
+      margin-bottom: 20px;
+    }
+
+    label {
+      margin-bottom: 10px;
+      font-weight: bold;
+      font-size: 24px;
+    }
+
+    textarea {
+      height: 100px;
+      width: 50%;
+      resize: none;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      margin-top: 3%;
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #3e8e41;
+    }
+
+    /* Style for the first label */
+    #label1 {
+      position: absolute;
+      margin-top: -3%;
+      margin-left: -28%;
+    }
+
+    /* Style for the second label */
+    #label2 {
+      position: absolute;
+      margin-top: 12%;
+      margin-left: -31%;
+    }
+
+    /* Style for the third label */
+    #label3 {
+      position: absolute;
+      margin-top: 26%;
+      margin-left: -31%;
+    }
+
+    .star-rating {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 5px;
+      margin-top: -2%;
+    }
+
+    .star-rating .star {
+      font-size: 5em;
+      color: #ccc;
+      cursor: pointer;
+      transition: color 0.2s ease-in-out;
+    }
+
+    .star-rating .star:hover,
+    .star-rating .star.active {
+      color: #ffd700;
+    }
+
+    .star-notification {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translate(-50%, 0);
+      padding: 5px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      font-size: 0.8em;
+      border-radius: 3px;
+      z-index: 9999;
+    }
+
+    .star:hover .star-notification {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <!--PreLoader-->
+  <div class="loader">
+    <div class="loader-inner">
+      <div class="circle"></div>
+    </div>
+  </div>
+  <!--PreLoader Ends-->
+
+  <!-- header -->
+  <div class="top-header-area" id="sticker">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-sm-12 text-center">
+          <div class="main-menu-wrap">
+            <!-- logo -->
+            <div class="site-logo">
+              <a href="index.html">
+                <img src="assets/img/logo.png" alt="" />
+              </a>
+            </div>
+            <!-- logo -->
+
+            <!-- menu start -->
+            <nav class="main-menu">
+              <ul>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li>
+                  <a href="#">Worker <i class="fas fa-chevron-down"></i></a>
+                  <ul>
+                    <li><a href="Farmer.html">Farmer</a></li>
+                    <li><a href="FarmerSendDurian.html">Farmer Send Durian</a></li>
+                    <li><a href="Distributor.html">Distributor</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <div class="header-icons">
+                    <a class="login-icon" href="Register.html"><i class="fas fa-sign-in-alt"></i></a>
+                    <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                  </div>
+                </li>
+              </ul>
+            </nav>
+            <style>
+              nav.main-menu ul li.worker-link ul {
+                display: none;
+              }
+
+              nav.main-menu ul li.worker-link:hover>ul {
+                display: block;
+              }
+
+              nav.main-menu ul {
+                position: relative;
+              }
+
+              nav.main-menu ul li ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                display: none;
+              }
+
+              nav.main-menu ul li:hover>ul {
+                display: block;
+              }
+            </style>
+
+            <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+            <div class="mobile-menu"></div>
+            <!-- menu end -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end header -->
+
+  <!-- search area -->
+  <div class="search-area">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <span class="close-btn"><i class="fas fa-window-close"></i></span>
+          <div class="search-bar">
+            <div class="search-bar-tablecell">
+              <h3>Search For:</h3>
+              <input type="text" placeholder="Keywords" />
+              <button type="submit">
+                Search <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end search arewa -->
+
+  <!-- breadcrumb-section -->
+  <div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2 text-center">
+          <div class="breadcrumb-text">
+            <p>Thanks for support !!!</p>
+            <h1>Durian Review</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end breadcrumb section -->
+
+  <img src="assets/img/review1.png" class="image-1">
+  <img src="assets/img/review2.png" class="image-2">
+  <img src="assets/img/review3.png" class="image-3">
+  <img src="assets/img/review4.jpg" class="image-4">
+
+
+  <img src="" alt="Product Image" class="durianImage" id="durianImage" />
+  <h2 id="productName"></h2>
+
+  <form onclick="starrr()">
+    <label for="comment">Comment :</label>
+    <textarea id="comment" name="comment"></textarea><br />
+    <label for="rating1">Rating :</label>
+
+
+    <div id="reviewinfo">
+      <!-- product -->
+    </div>
+
+    <!-- First row for taste -->
+    <label for="input1" id="label1">Taste :</label>
+    <div id="rating-taste" class="star-rating" role="rating" data-rating="0" aria-label="Taste Rating:">
+      <span class="star taste" data-value="1">&#9733;<span class="star-notification">Abysmal</span></span>
+      <span class="star taste" data-value="2">&#9733;<span class="star-notification">Bad</span></span>
+      <span class="star taste" data-value="3">&#9733;<span class="star-notification">Ok</span></span>
+      <span class="star taste" data-value="4">&#9733;<span class="star-notification">Good</span></span>
+      <span class="star taste" data-value="5">&#9733;<span class="star-notification">Excellent</span></span>
+    </div>
+
+    <label for="input2" id="label2">Fragrance :</label>
+    <!-- Second row for fragrance  -->
+    <div id="rating-fragrance" class="star-rating" role="rating" data-rating="0" aria-label="Fragrance Rating:">
+      <span class="star fragrance" data-value="1">&#9733;<span class="star-notification">Unpleasant</span></span>
+      <span class="star fragrance" data-value="2">&#9733;<span class="star-notification">Mild</span></span>
+      <span class="star fragrance" data-value="3">&#9733;<span class="star-notification">Distinct</span></span>
+      <span class="star fragrance" data-value="4">&#9733;<span class="star-notification">Intense</span></span>
+      <span class="star fragrance" data-value="5">&#9733;<span class="star-notification">Aromatic</span></span>
+    </div>
+
+    <label for="input3" id="label3">Creaminess :</label>
+    <!-- Third row for creaminess  -->
+    <div id="rating-creaminess" class="star-rating" role="rating" data-rating="0" aria-label="Creaminess Rating:">
+      <span class="star creaminess" data-value="1">&#9733;<span class="star-notification">Watery</span></span>
+      <span class="star creaminess" data-value="2">&#9733;<span class="star-notification">Thin</span></span>
+      <span class="star creaminess" data-value="3">&#9733;<span class="star-notification">Smooth</span></span>
+      <span class="star creaminess" data-value="4">&#9733;<span class="star-notification">Creamy</span></span>
+      <span class="star creaminess" data-value="5">&#9733;<span class="star-notification">Buttery</span></span>
+    </div>
+
+    <!-- <script>
+      // Initialize the rating widgets for all three rows
+      const ratingTaste = new CDB.Rating(document.getElementById("rating-taste"));
+      const ratingFragrance = new CDB.Rating(document.getElementById("rating-fragrance"));
+      const ratingCreaminess = new CDB.Rating(document.getElementById("rating-creaminess"));
+    </script> -->
+
+
+
+    <button type="button" onclick="ratingProduct()" id="feedback-btn">Feedback</button>
+  </form>
+  <!-- footer -->
+  <div class="footer-area">
+    <div class="container" style="margin-right: 80px">
+      <div class="row">
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-box about-widget">
+            <h2 class="widget-title">About us</h2>
+            <p>
+              Durian Empire is a family-owned business dedicated to bringing
+              the best durians to our customers. We have been in the durian
+              business for many years and have built a reputation for sourcing
+              only the highest quality durians from trusted suppliers. We
+              understand that durians can be an acquired taste, but we believe
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-box get-in-touch">
+            <h2 class="widget-title">Get in Touch</h2>
+            <ul>
+              <li>
+                No. 28, Jalan SS21/58, Damansara Utama, 47400 Petaling Jaya,
+                Selangor, Malaysia
+              </li>
+              <li>support@durianempire.com</li>
+              <li>+60 12-345-6789</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-box pages">
+            <h2 class="widget-title">Pages</h2>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="shop.html">Shop</a></li>
+              <li><a href="news.html">News</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end footer -->
+
+  <!-- <script>
+      const ratings = document.getElementById("rating1");
+      const rating1 = new CDB.Rating(ratings);
+      rating1.getRating;
+    </script> -->
+  <!-- <script>
+      const ratingss = document.getElementById("rating2");
+      const rating2 = new CDB.Rating(ratingss);
+      rating1.getRating;
+    </script>
+    <script>
+      const ratingsss = document.getElementById("rating1");
+      const rating3 = new CDB.Rating(ratingsss);
+      rating1.getRating;
+    </script> -->
+  <script>
+    var star1, star2, star3;
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    console.log(id);
+
+    //const idElem = document.getElementById('id');
+    //idElem.textContent = id;
+
+    accessToMetamask();
+    accessToContract();
+
+    function starrr() {
+      const ratingTaste = new CDB.Rating(document.getElementById("rating-taste"));
+      const ratingFragrance = new CDB.Rating(document.getElementById("rating-fragrance"));
+      const ratingCreaminess = new CDB.Rating(document.getElementById("rating-creaminess"));
+
+      const ratings = [ratingTaste.value, ratingFragrance.value, ratingCreaminess.value]; // store the three rating values in an array called ratings
+
+      // Get the star elements for each rating container
+      var tasteStars = document.querySelectorAll('#rating-taste .star');
+      var fragranceStars = document.querySelectorAll('#rating-fragrance .star');
+      var creaminessStars = document.querySelectorAll('#rating-creaminess .star');
+
+      // Add a click event listener to each star in each container
+      fragranceStars.forEach(function (star) {
+        star.addEventListener('click', function () {
+          star1 = this.getAttribute('data-value');
+          console.log('Fragrance rating:', star1);
+        });
+      });
+
+      tasteStars.forEach(function (star) {
+        star.addEventListener('click', function () {
+          star2 = this.getAttribute('data-value');
+          console.log('Taste rating:', star2);
+        });
+      });
+
+      creaminessStars.forEach(function (star) {
+        star.addEventListener('click', function () {
+          star3 = this.getAttribute('data-value');
+          console.log('Texture rating:', star3);
+        });
+      });
+
+      //console.log(ratings);
+      //console.log(stars1);
+    }
+
+
+
+    async function ratingProduct() {
+      const _id = await contract.methods.getDurianDetail(id).call();
+
+      const comment = document.getElementById("comment").value; // declare the comment variable and store the user's comment value
+
+      const ratings = [star1, star2, star3]; // store the three rating values in an array called ratings
+
+      await window.contract.methods.addRating(id, ratings, comment)
+        .send({ from: account })
+        .on('transactionHash', function (hash) {
+          console.log('Transaction Hash:', hash);
+        })
+        .on('receipt', function (receipt) {
+          console.log('Transaction Receipt:', receipt);
+        })
+        .on('error', console.error);
+    }
+
+
+    // Function to generate HTML for a single product
+    async function getProductHtml() {
+      await accessToMetamask();
+      await accessToContract();
+      const durians = await contract.methods.getDurianDetail(String(id)).call();
+      //const durians = await contract.methods.getDurianDetail(id).call();
+      console.log(durians[2]);
+      let img = "";
+      //switch TYPE
+      switch (durians[2]) {
+        case "MusangKing":
+          img = "assets/img/products/musangking.png";
+          break;
+        case "RedPrawn":
+          img = "assets/img/products/redprawn.png";
+          break;
+        case "GoldenPheonix":
+          img = "assets/img/products/goldenpheonix.png";
+          break;
+        case "D24":
+          img = "assets/img/products/d24.png";
+          break;
+        case "D168":
+          img = "assets/img/products/d168.Jng";
+          break;
+
+      }
+      //Based on product[4] set description & image & name
+      // Get the img element
+      const durianImg = document.getElementById("durianImage");
+      // Set the src attribute
+      durianImg.setAttribute("src", img);
+
+      return 0;
+    }
+
+    accessToMetamask();
+    accessToContract();
+    getProductHtml();
+    // Call the displayProducts function to generate HTML for all products and display them on the page
+    //displayReview();
+  </script>
+
+
+  <!-- end javascript-->
+
+  <!-- jquery -->
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <!-- bootstrap -->
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <!-- count down -->
+  <script src="js/jquery.countdown.js"></script>
+  <!-- isotope -->
+  <script src="js/jquery.isotope-3.0.6.min.js"></script>
+  <!-- waypoints -->
+  <script src="js/waypoints.js"></script>
+  <!-- owl carousel -->
+  <script src="js/owl.carousel.min.js"></script>
+  <!-- magnific popup -->
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <!-- mean menu -->
+  <script src="js/jquery.meanmenu.min.js"></script>
+  <!-- sticker js -->
+  <script src="js/sticker.js"></script>
+  <!-- main js -->
+  <script src="js/main.js"></script>
+</body>
+
+</html>

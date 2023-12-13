@@ -1,0 +1,444 @@
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+//import "hardhat/console.sol";
+
+contract DurianSupplyChain {
+    struct participants {
+        address add;
+        string pos;
+        string name;
+        string loc;
+    }
+
+    struct Durian {
+        //Owner
+        address owner;
+        //Format : D0001
+        string durianid;
+        uint256 tree;
+        string types;
+        uint256 price;
+        //Gram
+        uint256 weight;
+        uint256 harvestDate;
+        string state;
+        //Farm
+        address farmid;
+        //Distribution Center
+        //Format : C0001
+        address centerid;
+        uint256 distributeDate;
+        string deliveryMethod;
+        //Retailer
+        address retailer;
+        uint256 retailDate;
+        //Consumer
+        address consumer;
+        uint256 soldDate;
+        //(taste, fragrance, creaminess)
+        uint8[3] ratings;
+        string comment;
+    }
+
+    participants[] allParticipant;
+    address[] farmer;
+    address[] center;
+    address[] retail;
+    address[] consumer;
+    Durian[] durians;
+
+    address payable public buyer;
+
+    mapping(address => string[]) public durianCount;
+
+    mapping(string => uint32) public durianPrice;
+    //durianPrice["MusangKing"] = 30;
+
+    uint256 durianN = 1;
+
+    function munualAddress() public {
+        addParticipant(
+            0x5B38Da6a701c568545dCfcB03FcB875f56beddC4,
+            "Farm",
+            "Farm A",
+            "123, Selangor"
+        );
+        //console.log("Farmer added");
+        addParticipant(
+            0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2,
+            "Distribution Center",
+            "DC A",
+            "456, Selangor"
+        );
+        //console.log("Distribute Center added");
+        addParticipant(
+            0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db,
+            "Retailer",
+            "Retailer A",
+            "789, Selangor"
+        );
+        //console.log("Retailer added");
+        harvestDurian(1, "MusangKing", 1450);
+        //console.log("Durian D1 added");
+        harvestDurian(5, "D168", 980);
+        //console.log("Durian D2 added");
+        harvestDurian(3, "GoldenPheonix", 750);
+        //console.log("Durian D3 added");
+        durianPrice["MusangKing"] = 40;
+        durianPrice["RedPawn"] = 40;
+        durianPrice["GoldenPheonix"] = 40;
+        durianPrice["D168"] = 40;
+        durianPrice["D24"] = 40;
+    }
+
+    function addressExists(address[] memory array, address addr)
+        internal
+        pure
+        returns (bool)
+    {
+        for (uint256 i = 0; i < array.length; i++) {
+            if (array[i] == addr) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function durianExists(string memory _id) internal view returns (bool) {
+        for (uint256 i = 0; i < durians.length; i++) {
+            if (
+                keccak256(bytes(durians[i].durianid)) == keccak256(bytes(_id))
+            ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function durianExistsInHand(string memory _id)
+        internal
+        view
+        returns (bool)
+    {
+        for (uint256 i = 0; i < durianCount[msg.sender].length; i++) {
+            if (
+                keccak256(bytes(durianCount[msg.sender][i])) ==
+                keccak256(bytes(_id))
+            ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function addressExists(address addr) public view returns (bool) {
+        return (addressExists(farmer, addr) ||
+            addressExists(center, addr) ||
+            addressExists(retail, addr));
+    }
+
+    function addParticipant(
+        address _add,
+        string memory _part,
+        string memory _name,
+        string memory _loc
+    ) public {
+        require(!addressExists(_add), "Address exist in participant");
+        if (keccak256(bytes(_part)) == keccak256(bytes("Farm"))) {
+            farmer.push(address(_add));
+            allParticipant.push(
+                participants(_add, "farm", _name, _loc)
+            );
+        } else if (
+            keccak256(bytes(_part)) == keccak256(bytes("Distribution Center"))
+        ) {
+            center.push(address(_add));
+            allParticipant.push(
+                participants(_add, "center", _name, _loc)
+            );
+        } else if (keccak256(bytes(_part)) == keccak256(bytes("Retailer"))) {
+            retail.push(address(_add));
+            allParticipant.push(
+                participants(_add, "retail", _name, _loc)
+            );
+        }
+    }
+
+    function addConsumer(address _add) public {
+        require(!addressExists(_add));
+        consumer.push(address(_add));
+    }
+
+    function getAllFarmer() public view returns (address[] memory) {
+        return farmer;
+    }
+
+    function getAllCenter() public view returns (address[] memory) {
+        return center;
+    }
+
+    function getAllRetailer() public view returns (address[] memory) {
+        return retail;
+    }
+
+    function harvestDurian(
+        uint256 _tree,
+        string memory _types,
+        uint256 _weight
+    ) public {
+        //console.log("Harvesting ......");
+        require(addressExists(farmer, msg.sender));
+        string memory newid = string.concat("D", (uint2str(durianN)));
+
+        //console.log("New Durian ID: %s", newid);
+        //console.log("Block timestamp: %s", block.timestamp);
+        //console.log("Farmer address: %s", msg.sender);
+        durians.push(
+            Durian({
+                owner: msg.sender,
+                durianid: newid,
+                tree: _tree,
+                types: _types,
+                price: durianPrice[_types],
+                weight: _weight,
+                harvestDate: block.timestamp,
+                state: "harvested",
+                farmid: msg.sender,
+                centerid: address(0),
+                distributeDate: 0,
+                deliveryMethod: "",
+                retailer: address(0),
+                retailDate: 0,
+                consumer: address(0),
+                soldDate: 0,
+                ratings: [0, 0, 0],
+                comment: ""
+            })
+        );
+        //console.log("New durian object: ", durians[durianN].owner);
+        //console.log("New durian object: ");
+        durianCount[msg.sender].push(newid);
+        ////console.log("Updated durianCount: %s", durianCount[msg.sender]);
+        durianN++;
+        //console.log("New durian count: %s", durianN);
+    }
+
+    function getAllDurians() public view returns (Durian[] memory) {
+        return durians;
+    }
+
+    function getAllDuriansByAddress() public view returns (string[] memory) {
+        require(addressExists(msg.sender));
+        return durianCount[msg.sender];
+    }
+
+    function getDurianById(string memory _id)
+        internal
+        view
+        returns (Durian storage)
+    {
+        for (uint256 i = 0; i < durians.length; i++) {
+            if (
+                keccak256(bytes(durians[i].durianid)) == keccak256(bytes(_id))
+            ) {
+                return durians[i];
+            }
+        }
+        revert("Durian does not exist");
+    }
+
+    function getDurianDetail(string memory _id)
+        public
+        view
+        returns (Durian memory)
+    {
+        require(durianExists(_id), "Durian does not exist");
+        Durian memory d = getDurianById(_id);
+        //console.log("id : ", d.durianid);
+        //console.log("farm : ", d.farmid);
+        //console.log("center : ", d.centerid);
+        //console.log("retail : ", d.retailer);
+        //console.log("consumer : ", d.consumer);
+        return d;
+    }
+
+    function sendToDistribution(string memory _id, address distributionInfo)
+        public
+    {
+        require(durianExists(_id), "Durian never exist in the system");
+        require(
+            addressExists(distributionInfo),
+            "Distribute Center does not exist"
+        );
+        require(
+            addressExists(farmer, msg.sender),
+            "Only farm can send to distribution center"
+        );
+        require(
+            durianExistsInHand(_id),
+            "Durian does not exist in Contribute Center"
+        );
+        //console.log("Sending ......");
+        // Remove durian from farm and add it to center
+        bool found = false;
+        for (uint256 i = 0; i < durianCount[msg.sender].length; i++) {
+            if (
+                keccak256(bytes(durianCount[msg.sender][i])) ==
+                keccak256(bytes(_id))
+            ) {
+                durianCount[msg.sender][i] = durianCount[msg.sender][
+                    durianCount[msg.sender].length - 1
+                ];
+                durianCount[msg.sender].pop();
+                durianCount[distributionInfo].push(_id);
+                //console.log("Sent !!!");
+                found = true;
+                break;
+            }
+        }
+        require(found, "Durian does not exist in farm");
+
+        // Update durian information in the durians mapping
+        Durian storage durian = getDurianById(_id);
+        durian.state = "distributed";
+        durian.centerid = distributionInfo;
+        durian.distributeDate = block.timestamp;
+    }
+
+    function sendToRetailer(string memory _id, address retailerInfo) public {
+        require(durianExists(_id), "Durian never exist in the system");
+        require(addressExists(retailerInfo), "Retailer does not exist");
+        require(
+            addressExists(center, msg.sender),
+            "Only distribution center can send to retailer"
+        );
+        require(
+            durianExistsInHand(_id),
+            "Durian does not exist in Contribute Center"
+        );
+
+        //console.log("Sending ......");
+        // Remove durian from center and add it to retailer
+        bool found = false;
+        for (uint256 i = 0; i < durianCount[msg.sender].length; i++) {
+            if (
+                keccak256(bytes(durianCount[msg.sender][i])) ==
+                keccak256(bytes(_id))
+            ) {
+                durianCount[msg.sender][i] = durianCount[msg.sender][
+                    durianCount[msg.sender].length - 1
+                ];
+                durianCount[msg.sender].pop();
+                durianCount[retailerInfo].push(_id);
+                //console.log("Sent !!!");
+                found = true;
+                break;
+            }
+        }
+        require(found, "Durian does not exist in distribution center");
+
+        // Update durian information in the durians mapping
+        Durian storage durian = getDurianById(_id);
+        durian.state = "retailed";
+        durian.retailer = retailerInfo;
+        durian.retailDate = block.timestamp;
+    }
+
+    function buyFromRetailer(string memory _id) public payable {
+        require(durianExists(_id), "Durian never exist in the system");
+        require(durianExists(_id), "Durian never exist in the system");
+        //require(
+        //    addressExists(consumer, msg.sender),
+        //    "Only consumer can buy from retailer"
+        //);
+        //require(durianExistsInHand(_id), "Durian does not exist in retailer");
+
+        // Check that the consumer sends enough ether to pay for the durian
+        Durian storage durian = getDurianById(_id);
+        uint256 price = (durianPrice[durian.types] * durian.weight) /
+            10000 ether;
+        //console.log("Balance :", msg.value);
+        //console.log("Price :",price);
+        require(msg.value >= price, "Insufficient ether sent to buy durian");
+
+        // Remove durian from retailer and add it to consumer
+        bool found = false;
+        for (uint256 i = 0; i < durianCount[durian.retailer].length; i++) {
+            if (
+                keccak256(bytes(durianCount[durian.retailer][i])) ==
+                keccak256(bytes(_id))
+            ) {
+                durianCount[durian.retailer][i] = durianCount[durian.retailer][
+                    durianCount[durian.retailer].length - 1
+                ];
+                durianCount[durian.retailer].pop();
+                durianCount[msg.sender].push(_id);
+                found = true;
+                break;
+            }
+        }
+        require(found, "Durian does not exist in retailer");
+
+        // Update durian information in the durians mapping
+        durian.state = "sold";
+        durian.consumer = msg.sender;
+        durian.soldDate = block.timestamp;
+
+        // Send ether to retailer
+        buyer = payable(msg.sender);
+        address payable retailerAddress = payable(durian.retailer);
+        retailerAddress.transfer(price);
+        durian.owner = payable(msg.sender);
+
+        // Refund any extra ether sent by the consumer
+        if (msg.value > price) {
+            payable(msg.sender).transfer(msg.value - price);
+        }
+    }
+
+    function addRating(
+        string memory _id,
+        uint8[3] memory _ratings,
+        string memory _comment
+    ) public {
+        // Check that the durian exists and has been sold to the caller of this function
+        require(durianExists(_id), "Durian never exist in the system");
+        require(
+            durianExistsInHand(_id),
+            "You cannot add a rating to a durian that you did not buy"
+        );
+        for (uint8 i = 0; i < 3; i++) {
+            require(_ratings[i] > 0, "Rating must be above 0");
+            require(_ratings[i] < 6, "Rating maximum is  5");
+        }
+
+        // Update the durian's ratings and comment
+        Durian storage durian = getDurianById(_id);
+        durian.ratings = _ratings;
+        durian.comment = _comment;
+        durian.state = "rated";
+    }
+
+    function uint2str(uint256 _i) internal pure returns (string memory) {
+        if (_i == 0) {
+            return "0";
+        }
+        uint256 j = _i;
+        uint256 len;
+        while (j != 0) {
+            len++;
+            j /= 10;
+        }
+        bytes memory bstr = new bytes(len);
+        uint256 k = len;
+        while (_i != 0) {
+            k = k - 1;
+            uint8 temp = (48 + uint8(_i - (_i / 10) * 10));
+            bytes1 b1 = bytes1(temp);
+            bstr[k] = b1;
+            _i /= 10;
+        }
+        return string(bstr);
+    }
+}

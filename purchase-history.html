@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	</meta>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	</meta>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	</meta>
+
+	<title>Purchase History</title>
+
+	<link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
+	</link>
+
+	<!-- google font -->
+	<!--smart contract-->
+	<script src="SmartContract.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+	</link>
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+	</link>
+
+	<!-- fontawesome -->
+
+	<link rel="stylesheet" href="css/all.min.css">
+	</link>
+
+	<!-- bootstrap -->
+
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	</link>
+
+	<!-- owl carousel -->
+
+	<link rel="stylesheet" href="css/owl.carousel.css">
+	</link>
+
+	<!-- magnific popup -->
+
+	<link rel="stylesheet" href="css/magnific-popup.css">
+	</link>
+
+	<!-- animate css -->
+
+	<link rel="stylesheet" href="css/animate.css">
+	</link>
+
+	<!-- mean menu css -->
+
+	<link rel="stylesheet" href="css/meanmenu.min.css">
+	</link>
+
+	<!-- main style -->
+
+	<link rel="stylesheet" href="css/main.css">
+	</link>
+
+	<!-- responsive -->
+
+	<link rel="stylesheet" href="css/responsive.css">
+	</link>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	</meta>
+
+	<!-- <link href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
+	<style type="text/css">
+		body {
+			background: #eee;
+		}
+
+		.panel-order .row {
+			border-bottom: 1px solid #ccc;
+		}
+
+		.panel-order .row:last-child {
+			border: 0px;
+		}
+
+		.col-md-1 {
+			width: 130px;
+			height: 150px;
+		}
+
+		.panel-order .row .col-md-2 {
+			text-align: center;
+			padding-top: 15px;
+
+		}
+
+		.panel-order .row .ljj-md-1 img {
+			width: 150px;
+			max-height: 150px;
+		}
+
+		.panel-order .row .row {
+			border-bottom: 0;
+		}
+
+		.panel-order .row .col-md-11 {
+			margin-top: 1%;
+			margin-bottom: 1%;
+			border: 1px solid #A9A9A9;
+		}
+
+		.panel-order .row .row .col-md-12 {
+			padding-top: 7px;
+			padding-bottom: 7px;
+		}
+
+		.panel-order .row .row .col-md-12:last-child {
+			font-size: 20px;
+			color: #555;
+			background: #efefef;
+		}
+
+		.panel-order .btn-group {
+			margin: 0px;
+			padding: 0px;
+		}
+
+		.panel-order .panel-body {
+			padding-top: 0px;
+			padding-bottom: 0px;
+		}
+
+		.panel-order .panel-deading {
+			margin-bottom: 0;
+		}
+
+		button {
+			background-color: green;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			font-size: 16px;
+			float: right;
+		}
+
+		.durian-image {
+			width: 200px;
+			height: 150px;
+			object-fit: cover;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- PreLoader -->
+
+	<div class="loader">
+		<div class="loader-inner">
+			<div class="circle"></div>
+		</div>
+	</div>
+
+	<!-- PreLoader Ends -->
+	<!-- header -->
+
+	<div class="top-header-area" id="sticker">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-sm-12 text-center">
+					<div class="main-menu-wrap">
+						<!-- logo -->
+
+						<div class="site-logo">
+							<a href="index.html">
+								<img src="assets/img/logo.png" alt="">
+							</a>
+						</div>
+
+						<!-- logo -->
+						<!-- menu start -->
+
+						<nav class="main-menu">
+							<ul>
+								<li><a href="shop.html">Shop</a></li>
+								<li><a href="about.html">About</a></li>
+								<li><a href="news.html">News</a></li>
+								<li><a href="contact.html">Contact</a></li>
+								<li>
+									<a href="#">Worker <i class="fas fa-chevron-down"></i></a>
+									<ul>
+										<li><a href="Farmer.html">Farmer</a></li>
+										<li><a href="FarmerSendDurian.html">Farmer Send Durian</a></li>
+										<li><a href="Distributor.html">Distributor</a></li>
+									</ul>
+								</li>
+								<li>
+									<div class="header-icons">
+										<a class="login-icon" href="Register.html"><i
+												class="fas fa-sign-in-alt"></i></a>
+										<a class="mobile-hide search-bar-icon" href="#"><i
+												class="fas fa-search"></i></a>
+									</div>
+								</li>
+							</ul>
+						</nav>
+						<style>
+							nav.main-menu ul li.worker-link ul {
+								display: none;
+							}
+
+							nav.main-menu ul li.worker-link:hover>ul {
+								display: block;
+							}
+
+							nav.main-menu ul {
+								position: relative;
+							}
+
+							nav.main-menu ul li ul {
+								position: absolute;
+								top: 100%;
+								left: 0;
+								display: none;
+							}
+
+							nav.main-menu ul li:hover>ul {
+								display: block;
+							}
+						</style>
+
+						<a class="mobile-show search-bar-icon" href="#">
+							<i class="fas fa-search"></i>
+						</a>
+
+						<div class="mobile-menu"></div>
+						<!-- menu end -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- end header -->
+	<!-- search area -->
+
+	<div class="search-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<span class="close-btn">
+						<i class="fas fa-window-close"></i>
+					</span>
+
+					<div class="search-bar">
+						<div class="search-bar-tablecell">
+							<h3>Search For:</h3>
+
+							<input type="text" placeholder="Keywords"></input>
+
+							<button type="submit">
+								Search
+
+								<i class="fas fa-search"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- end search arewa -->
+	<!-- breadcrumb-section -->
+
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p>Fresh and Organic</p>
+
+						<h1>Purchase History</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- end breadcrumb section -->
+
+	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	</link>
+
+	<div class="container bootdey">
+		<div class="panel panel-default panel-order">
+			<div class="panel-heading"></div>
+
+			<div class="panel-body">
+				<div class="row" id="history-lists">
+					<!-- <div class="col-md-11">
+						<div class="row">
+							<img src="" class="media-object img-thumbnail durian-image" id="durianImage" />
+							<div class="col-md-12">
+								<span><strong>Durian Name: </strong></span><span class="durian-name"></span><br />
+								<span>Durian Weight :</span><br />
+								<span>Price :</span>
+								<button class="review-button" onclick="goToReviewPage()">Review</button>
+							</div>
+						</div>
+					</div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- footer -->
+
+	<div class="footer-area">
+		<div class="container" style="margin-right: 80px">
+			<div class="row">
+				<div class="col-lg-3 col-md-6">
+					<div class="footer-box about-widget">
+						<h2 class="widget-title">About us</h2>
+
+						<p>
+							Durian Empire is a family-owned business dedicated to bringing
+							the best durians to our customers. We have been in the durian
+							business for many years and have built a reputation for sourcing
+							only the highest quality durians from trusted suppliers. We
+							understand that durians can be an acquired taste, but we believe
+						</p>
+					</div>
+				</div>
+
+				<div class="col-lg-3 col-md-6">
+					<div class="footer-box get-in-touch">
+						<h2 class="widget-title">Get in Touch</h2>
+
+						<ul>
+							<li>
+								No. 28, Jalan SS21/58, Damansara Utama, 47400 Petaling Jaya,
+								Selangor, Malaysia
+							</li>
+
+							<li>support@durianempire.com</li>
+
+							<li>+60 12-345-6789</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="col-lg-3 col-md-6">
+					<div class="footer-box pages">
+						<h2 class="widget-title">Pages</h2>
+
+						<ul>
+							<li>
+								<a href="index.html">Home</a>
+							</li>
+
+							<li>
+								<a href="about.html">About</a>
+							</li>
+
+							<li>
+								<a href="shop.html">Shop</a>
+							</li>
+
+							<li>
+								<a href="news.html">News</a>
+							</li>
+
+							<li>
+								<a href="contact.html">Contact</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- end footer -->
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+	<!-- <script>
+		// retrieve the value of the durian parameter from the URL query string
+		const urlSearchParams = new URLSearchParams(window.location.search);
+		const durianName = urlSearchParams.get("durian");
+
+		// retrieve the value of the image parameter from the URL query string
+		const imageUrl = urlSearchParams.get("image");
+
+		// set the text content of the span element with the durian name
+		const durianNameSpan = document.querySelector(".durian-name");
+		durianNameSpan.textContent = durianName;
+
+		// set the source attribute of the img element with the image URL
+		const durianImage = document.getElementById("durianImage");
+		durianImage.src = imageUrl;
+	</script> -->
+
+	<script>
+		accessToMetamask();
+		accessToContract();
+		// function goToReviewPage() {
+		// 	const durianName = document.querySelector(".durian-name").textContent;
+		// 	const imageUrl = document.getElementById("durianImage").src;
+
+		// 	const reviewUrl = "durian-review.html"
+		// 		+ "?durian=" + encodeURIComponent(durianName)
+		// 		+ "&image=" + encodeURIComponent(imageUrl);
+
+		// 	window.location.href = reviewUrl;
+		// }
+
+
+		function goToReviewPage(id) {
+			var durianid = id;
+			var durianButton = event.target.parentNode;
+			var durianName = durianButton.parentNode.querySelector("span").innerHTML;
+			var durianImage = durianButton.parentNode
+				.querySelector("img")
+				.getAttribute("src");
+
+			// Construct the URL with the durian name and image as query parameters
+			const urlSearchParams = new URLSearchParams();
+			urlSearchParams.append("durian", durianName);
+			urlSearchParams.append("image", durianImage);
+			const url = `durian-review.html?${urlSearchParams.toString()}`;
+
+			// Navigate to the purchase history page with the URL containing the query parameters
+			window.location.href = url;
+		}
+
+		function goToReviewPage2(id) {
+			var durianid = id;
+			// Navigate to the purchase history page with the URL containing the query parameters
+			window.location.href = `durian-review.html?id=${durianid.toString()}`;
+		}
+
+		// Function to generate HTML for a single product
+		async function getProductHtml(id) {
+			const durians = await contract.methods.getDurianDetail(id).call();
+			let img = "";
+			//switch TYPE
+			switch (durians[2]) {
+				case "MusangKing":
+					img = "assets/img/products/musangking.png";
+					break;
+				case "RedPrawn":
+					img = "assets/img/products/redprawn.png";
+					break;
+				case "GoldenPheonix":
+					img = "assets/img/products/goldenpheonix.png";
+					break;
+				case "D24":
+					img = "assets/img/products/d24.png";
+					break;
+				case "D168":
+					img = "assets/img/products/d168.jpg";
+					break;
+
+			}
+			//Based on product[4] set description & image & name
+			return `
+	  
+	   	<div class="col-md-11">
+			<div class="row">
+			<img src="${img}" class="media-object img-thumbnail durian-image" id="durianImage" />
+				<div class="col-md-12">
+					<span><strong>Durian Name: ${durians[2]}</strong></span><span class="durian-name"></span><br />
+					<span>Durian Weight : ${durians[4]}</span><br />
+					<span>Price :${durians[3]}</span>
+					<button class="review-button" onclick="goToReviewPage2(this.value)" value="${id}">Review</button>
+				</div>
+			</div>
+		</div>`;
+		}
+		// Function to display products on the page
+		async function displayHistory() {
+			//Get all durian
+			await accessToMetamask();
+			await accessToContract();
+			console.log("getAllDurians");
+			const durians = await contract.methods.getAllDuriansByAddress().call({ from: account });
+			console.log(durians);
+
+			const container = document.getElementById("history-lists");
+			let html = "";
+			let html2 = "";
+			for (let i = 0; i < durians.length; i++) {
+				console.log(durians[i]);
+				html2 = await getProductHtml(durians[i]);
+				html += html2;
+			}
+			container.innerHTML = html;
+		}
+
+		accessToMetamask();
+		accessToContract();
+		// Call the displayProducts function to generate HTML for all products and display them on the page
+		displayHistory();
+
+	</script>
+
+	<!-- end javascript -->
+	<!-- jquery -->
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<!-- bootstrap -->
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<!-- count down -->
+	<script src="js/jquery.countdown.js"></script>
+	<!-- isotope -->
+	<script src="js/jquery.isotope-3.0.6.min.js"></script>
+	<!-- waypoints -->
+	<script src="js/waypoints.js"></script>
+	<!-- owl carousel -->
+	<script src="js/owl.carousel.min.js"></script>
+	<!-- magnific popup -->
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<!-- mean menu -->
+	<script src="js/jquery.meanmenu.min.js"></script>
+	<!-- sticker js -->
+	<script src="js/sticker.js"></script>
+	<!-- main js -->
+	<script src="js/main.js"></script>
+</body>
+
+</html>

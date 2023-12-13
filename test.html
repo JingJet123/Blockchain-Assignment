@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>METAMASK CONNECTION</title>
+	<!--smart contract-->
+	<script src="SmartContract.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
+
+	<style>
+		p {
+			font-size: 14px;
+			text-align: left;
+			color: #000000e0;
+		}
+
+		body {
+			background-color: rgb(247, 240, 242);
+			font-size: 33px;
+			text-align: center;
+		}
+
+		button {
+			background-color: rgb(211, 241, 231);
+			font-size: 30px;
+			font-family: Impact, Haettenschweiler, 'Arial Narrow', sans-serif;
+		}
+
+		button:hover {
+			background-color: rgb(146, 205, 245);
+		}
+	</style>
+</head>
+
+<body>
+	<br>
+	<button onclick="accessToMetamask()">Connect Metamask</button> <br>
+	<p id="accountArea"></p>
+	<br>
+
+	<button onclick="accessToContract()">Connect to Smart Contract</button> <br>
+	<p id="contractArea"></p>
+	<br>
+
+	<button onclick="getAllDetail();">get All Detail</button> <br>
+	<button onclick="getAllFarmers();">get Farmer from Contract</button> <br>
+	<button onclick="getAllCenter();">get Center from Contract</button> <br>
+	<button onclick="getAllRetailer();">get Retailer from Contract</button> <br>
+	<button onclick="getDurianDetail();">get All durian detail</button> <br>
+	<button onclick="addParticipants()"> Register Farmer</button>
+	<button onclick="addDistributor()"> Register Distributor</button>
+	<button onclick="addRetailer()"> Register Retailer</button>
+	<button onclick="sendDistribution()"> Send to distributor</button>
+	<button onclick="sendRetail()"> Send to retailer</button>
+	<button onclick="buyRetail()"> Buy from retailer</button>
+	<button onclick="ratingProduct()"> Rating Product</button>
+	<button onclick="getPartSize()"> Get Size</button>
+	<p id="oid"></p>
+	<p id="opost"></p>
+	<p id="oname"></p>
+	<p id="olocation"></p>
+	<button id="buy" onclick="harvestDurian()"> Harvest Durian</button>
+	<button id="buy" onclick="getAllDurians()"> Get All Durian</button>
+	<br>
+
+	<br>
+	</div>
+	<div id="transactionSection">
+		<label for="Pname">Address</Address></label><br>
+		<input type="text" id="post" name="post"><br>
+		<label for="Pprice">Post</label><br>
+		<input type="text" id="post" name="post"> <br>
+		<label for="Pprice">Name</label><br>
+		<input type="text" id="namLocatione" name="name"> <br>
+		<label for="Pprice">Location</label><br>
+		<input type="text" id="location" name="location"> <br>
+		<button id="submit" onclick="addParticipants()"> Register Farmer</button>
+	</div>
+
+	<script>
+
+
+		//Create participant 
+		const addParticipants = async () => {
+			try {
+				//useEffect(() => { loadContract }, [web3])
+				const name = "Farm A";
+				const loc = "123, Selangor";
+				console.log("Adding");
+				await window.contract.methods.addFarm(account, name, loc)
+					.send({ from: account })
+					.on('transactionHash', function (hash) {
+						console.log('Transaction Hash:', hash);
+					})
+					.on('receipt', function (receipt) {
+						console.log('Transaction Receipt:', receipt);
+					})
+					.on('error', console.error);
+			} catch {
+
+			}
+			//await durianContract.methods.addParticipant(address, position, name, location);
+
+		}
+
+		const addDistributor = async () => {
+			try {
+				//useEffect(() => { loadContract }, [web3])
+				const name = "Center A";
+				const loc = "456, Selangor";
+				console.log("Adding");
+				await window.contract.methods.addCenter(account, name, loc)
+					.send({ from: account })
+					.on('transactionHash', function (hash) {
+						console.log('Transaction Hash:', hash);
+					})
+					.on('receipt', function (receipt) {
+						console.log('Transaction Receipt:', receipt);
+					})
+					.on('error', console.error);
+			} catch {
+
+			}
+			//await durianContract.methods.addParticipant(address, position, name, location);
+
+		}
+
+		const addRetailer = async () => {
+			try {
+				//useEffect(() => { loadContract }, [web3])
+				const name = "Retailer A";
+				const loc = "789, Selangor";
+				console.log("Adding");
+				await window.contract.methods.addRetailer(account, name, loc)
+					.send({ from: account })
+					.on('transactionHash', function (hash) {
+						console.log('Transaction Hash:', hash);
+					})
+					.on('receipt', function (receipt) {
+						console.log('Transaction Receipt:', receipt);
+					})
+					.on('error', console.error);
+			} catch {
+
+			}
+			//await durianContract.methods.addParticipant(address, position, name, location);
+
+		}
+
+		// async function getAllFarmer() {
+		// 	console.log("Getting Farmer");
+		// 	//const totalFarmers = await contract.methods.getAllFarmer().call();
+		// 	const totalFarmers = await contract.methods.getAllFarmer().call({gas: 1000000});
+		// 	console.log(totalFarmers);
+		// };
+
+		async function getAllDetail() {
+			const result = await contract.methods.getAddName(account).call();
+			console.log("Detail: ", result);
+			console.log("Detail: ", result[0]);
+		}
+
+		async function getAllFarmers() {
+			const result = await contract.methods.getAllFarms().call();
+			console.log('All farmers:', result);
+			console.log('All farmers 2:', result[0]);
+		};
+
+		async function getAllCenter() {
+			const result = await contract.methods.getAllCenter().call();
+			console.log('All Center:', result);
+			console.log('All Center 2:', result[0]);
+		};
+
+		async function getAllRetailer() {
+			const result = await contract.methods.getAllRetailer().call();
+			console.log('All Retailer:', result);
+			console.log('All Retailer 2:', result[0]);
+		};
+
+		async function getPartSize() {
+			const result = await contract.methods.getParticipantsSize().call({ from: account }, function (error, result) {
+				console.log(error);
+				console.log(result);
+			});
+			console.log('All size:', result);
+			console.log('All size 2:', result[0]);
+		};
+
+
+
+		const harvestDurian = async () => {
+			const tree = 1; // example value for the _tree argument
+			const durianType = "MusangKing"; // example value for the _types argument
+			const weight = 500; // example value for the _weight argument
+			const price = 40;
+
+			try {
+				const result = await contract.methods.harvestDurian(tree, durianType
+					, weight, price).send({
+						from: account
+					});
+				console.log('Transaction hash:', result.transactionHash);
+			} catch (error) {
+				console.error('Error occurred:', error);
+			}
+		};
+
+		const sendDistribution = async () => {
+			try {
+				const _id = "D1";
+				const _delivery = "Land";
+
+				// Prompt user to select a distributor account
+				//const accounts = await window.ethereum.request({ method: 'eth_requestAccounts', accounts: ['metamask', 'ledger', 'trezor'] });
+
+				//const distributorAccount = accounts[0];
+				const distributorAccount = web3.utils.toHex('0xE504dF110Fb9C8333F730A99981613bB4e6a46F2');
+
+				await window.contract.methods.sendToDistribution(_id, distributorAccount, _delivery)
+					.send({ from: account })
+					.on('transactionHash', function (hash) {
+						console.log('Transaction Hash:', hash);
+					})
+					.on('receipt', function (receipt) {
+						console.log('Transaction Receipt:', receipt);
+					})
+					.on('error', console.error);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+
+		// CoinFlipper.deployed().then(function (instance) {
+		// 	meta = instance;
+		// 	return meta.sendToDistribution(_id, distributorAccount, _delivery)
+		// }).then(function (receipt) {
+		// 	console.log('Transaction Receipt:', receipt);
+		// }).catch(function (error) {
+		// 	console.error(error);
+		// });
+
+		const sendRetail = async () => {
+			try {
+				const _id = "D1";
+
+				// Prompt user to select a distributor account
+				//const accounts = await window.ethereum.request({ method: 'eth_requestAccounts', accounts: ['metamask', 'ledger', 'trezor'] });
+
+				//const distributorAccount = accounts[0];
+				//const distributorAccount = web3.utils.toHex('0xE504dF110Fb9C8333F730A99981613bB4e6a46F2');
+				const retailerAccount = web3.utils.toHex('0x3D7eFb49142b2bD2e19B6DfE1779451Ea166506c');
+
+				await window.contract.methods.sendToRetailer(_id, retailerAccount)
+					.send({ from: account })
+					.on('transactionHash', function (hash) {
+						console.log('Transaction Hash:', hash);
+					})
+					.on('receipt', function (receipt) {
+						console.log('Transaction Receipt:', receipt);
+					})
+					.on('error', console.error);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+
+		const buyRetail = async () => {
+			try {
+				const _id = "D1";
+
+				await window.contract.methods.buyFromRetailer(_id)
+					.send({ from: account })
+					.on('transactionHash', function (hash) {
+						console.log('Transaction Hash:', hash);
+					})
+					.on('receipt', function (receipt) {
+						console.log('Transaction Receipt:', receipt);
+					})
+					.on('error', console.error);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+
+		const ratingProduct = async () => {
+			try {
+				const _id = "D1";
+				const ratings = [1, 2, 3];
+				const comment = "I Like It";
+
+				await window.contract.methods.addRating(_id, ratings, comment)
+					.send({ from: account })
+					.on('transactionHash', function (hash) {
+						console.log('Transaction Hash:', hash);
+					})
+					.on('receipt', function (receipt) {
+						console.log('Transaction Receipt:', receipt);
+					})
+					.on('error', console.error);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+
+
+		async function getAllDurians() {
+			console.log("getAllDurians");
+			const durians = await contract.methods.getAllDuriansByAddress().call({ from: account });
+			console.log(durians);
+			console.log(durians[0]);
+		}
+
+		async function getDurianDetail() {
+			const id = "D1";
+			console.log("getDurianDetial");
+			const durians = await contract.methods.getDurianDetail(id).call();
+			console.log(durians);
+			console.log(durians[0]);
+		}
+
+
+		// 	// Function to harvest a new durian
+		// 	async function harvestDurian(tree, durianType, price) {
+		// 		try {
+		// 			// Get the current Ethereum account address
+		// 			const accounts = await web3.eth.getAccounts();
+		// 			//const account = accounts[0];
+
+		// 			// Call the smart contract function
+		// 			const result = await contract.methods.harvestDurian(tree, durianType, price).send({ from: account });
+
+		// 			console.log('Durian harvested:', result.events.Harvested.returnValues);
+		// 		} catch (error) {
+		// 			console.error('Error:', error);
+		// 		}
+		// 	}
+
+		// 	//Get all durian that are under retailer
+		// 	const readAllDurian = async () => {
+
+		// 		const retailers = await window.contract.methods.getAllRetailer().call();
+
+		// 		const allDurian = [];
+
+		// 		for (const retailer of retailers) {
+		// 			const durian = await window.contract.methods.durianExistsInHand(retailer).call();
+		// 			allDurian.push(...durian);
+		// 		}
+
+		// 		const durianContainer = document.getElementById("durian-container");
+
+		// 		allDurian.forEach((durian, index) => {
+		// 			const durianItem = document.createElement("div");
+		// 			durianItem.classList.add("col-lg-4", "col-md-6", "text-center", "strawberry");
+		// 			durianItem.innerHTML = `
+		//   <div class="single-product-item">
+		//     <div class="product-image">
+		//       <a href="single-product${index + 1}.html"><img src="assets/img/products/${durian.image}" alt=""></a>
+		//     </div>
+		//     <h3>${durian.name}</h3>
+		//     <p class="product-price"><span>Per Kg</span> RM${durian.price}</p>
+		//     <a href="single-product${index + 1}.html" class="cart-btn"><i class="fa fa-info-circle"></i> View Info</a>
+		//     <a class="cart-btn" onclick="purchase('${durian.id}')"><i class="fas fa-shopping-cart"></i> Purchase</a>
+		//   </div>
+		// `;
+		// 			durianContainer.appendChild(durianItem);
+		// 		});
+		// 	};
+
+		accessToMetamask();
+		accessToContract();
+		//addParticipants("0x419451d8a4e2EB3c833d594111bE71812c2050Be", "Farm", "Farm A", "123,Selangor")
+		//getAllFarmer();
+		//addParticipant("0xFE6E9048766286181Ce1caee6710927b22CC2520", "Distribution Center", "Center A", "456,Selangor")
+		//addParticipant("0xe16AA349DaB7bd72e4CE25Aab6b5c8e578B63BbC", "Retailer", "Retailer A", "789,Selangor")
+		// harvestDurian(1, 'MusangKing', 1450);
+		// harvestDurian(1, 'MusangKing', 1450);
+		// harvestDurian(1, 'MusangKing', 1450);
+		// readAllDurian();
+	</script>
+
+</body>
+
+</html>
